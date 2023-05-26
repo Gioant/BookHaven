@@ -20,3 +20,7 @@ body {
 header,footer {
     background-color: var(--darkBlue-bg);
 }
+
+img {
+    max-width: 100%;
+}
