@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700&display=swap');
+
+/* don't forget to add underline upon hover for remove */
+
+:root {
+    --darkBlue-bg: #003566;
+    --redTxt: #e53e3e;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Rubik', sans-serif;
+}
+
+header,footer {
+    background-color: var(--darkBlue-bg);
+}
