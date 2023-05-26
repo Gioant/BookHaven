@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700&display=swap');
 
+@font-face {
+    font-family: "Norse";
+    src: url("../Font/Norsebold.otf") format("opentype");
+}
+
 /* don't forget to add underline upon hover for remove */
 
 :root {
@@ -17,10 +22,59 @@ body {
     font-family: 'Rubik', sans-serif;
 }
 
-header,footer {
-    background-color: var(--darkBlue-bg);
-}
 
 img {
     max-width: 100%;
+}
+
+header,
+footer {
+    background-color: var(--darkBlue-bg);
+}
+
+footer {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 700;
+    font-size: 1em;
+    box-shadow: 0px -5px 5px 0px rgb(90, 90, 90, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #ffecd1;
+}
+
+footer img {
+    height: 30px;
+}
+
+.ft-group {
+    display: flex;
+    align-items: center;
+}
+
+#odin-group {
+    display: flex;
+    align-items: center;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+#odin-group a {
+    color: #cc9543;  
+    letter-spacing: 0.75px;
+    font-family: "Norse";
+    font-size: 18px;
+    text-decoration: none;
+}
+
+#odin-group p {
+    padding-left: 5px;
+}
+
+
+#github-logo {
+    background-color: white;
+    border-radius: 100%;
+    border: 1px solid white;
 }
