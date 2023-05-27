@@ -19,47 +19,29 @@
 
     <main>
         <section>
-            <table>
-                <caption>
-                    <h2>Welcome To Our Simple Library!</h2>
-                    <p>Add a book by adding click on the + sign, filling the required information</p>
-                </caption>
+            <h2>Your Online Library Hub</h2>
+            <div id="book-add">
+                <p>Click this button to add a book</p>
+                <button>
+                    <img src="./images/add.png" alt="add icon">
+                </button>
+            </div>
+            <div class="card-books">
+                <div class="top">
+                    <img src="" alt="">
+                </div>
 
-
-                <thead>
-                    <tr>
-                        <th class="tb-categories">Title</th>
-                        <th class="tb-categories">Author</th>
-                        <th class="tb-categories">Pages</th>
-                        <th class="tb-categories">Published Date</th>
-                        <th class="tb-categories">Status</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <tr>
-                        <th>Test</th>
-                        <td>Hitler</td>
-                        <td>213</td>
-                        <td>2012</td>
-                        <td><a href="#">Remove</a></td>
-                    </tr>
-                    <tr>
-                        <th>Testing</th>
-                        <td>Andy</td>
-                        <td>396</td>
-                        <td>2015</td>
-                        <td><a href="#">Remove</a></td>
-                    </tr>
-                    <tr>
-                        <th>Naruto</th>
-                        <td>Boruto</td>
-                        <td>514</td>
-                        <td>2008</td>
-                        <td><a href="#">Remove</a></td>
-                    </tr>
-                </tbody>
-            </table>
+                <div class="bottom">
+                    <h3 class="book-title">Ender's Game</h3>
+                    <p class="book-author">Orson Scott Card</p>
+                    <p class="book-pages">374 pages</p>
+                    <p class="book-year">1985</p>
+                    <button class="book-status">Read</button>
+                    <button class="remove">
+                        <img src="./images/trash.png" alt="trash-delete">
+                    </button>
+                </div>
+            </div>
         </section>
     </main>
 
