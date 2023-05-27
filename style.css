@@ -5,11 +5,12 @@
     src: url("./Font/Norsebold.otf") format("opentype");
 }
 
-/* don't forget to add underline upon hover for remove */
 
 :root {
     --darkBlue-bg: #003566;
     --redTxt: #e53e3e;
+    --darkGray: #f9fafb;
+    --mainbg: #DBD7D2;
 }
 
 * {
@@ -30,13 +31,10 @@ img {
 }
 
 main {
+    background-color: var(--mainbg);
     display: flex;
     justify-content: center;
     flex: 1;
-}
-
-section {
-    padding-top: 4rem;
 }
 
 header div {
@@ -60,12 +58,57 @@ footer {
     background-color: var(--darkBlue-bg);
 }
 
+section {
+    padding-top: 2rem;
+}
+
 h2 {
     font-size: 30px;
 }
 
-caption {
-    padding: 1.25rem;
+#book-add{
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#book-add button {
+    border: none;
+    background-color: unset;
+    padding-left: .5rem;
+}
+
+#book-add button img {
+    height: 35px;
+    width: 35px;
+}
+
+.book-status {
+    padding: .5rem 1.25rem;
+}
+
+.remove {
+    align-self: flex-end;
+    border: none;
+    background-color: transparent;
+    height: 25px;
+    width: 25px;
+}
+
+.card-books {
+    display: flex;
+    flex-direction: column;
+    background-color: #F8F8FF;
+    border-radius: 12px;
+}
+
+.bottom {
+    padding: .75rem 1rem;
+    display: inherit;
+    flex-direction: inherit;
+    gap: .75rem;
 }
 
 
@@ -105,12 +148,19 @@ footer img {
     text-decoration: none;
 }
 
+#odin-group a img {
+    padding-right: .25rem;
+}
+
 #odin-group p {
     padding-left: 5px;
 }
 
+.profile-link {
+    padding-left: .25rem;
+}
 
-#github-logo {
+.profile-link img {
     background-color: white;
     border-radius: 100%;
     border: 1px solid white;
