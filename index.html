@@ -31,21 +31,25 @@
             <div id="modal">
                 <div id="modal-content">
                     <span id="close">&times;</span>
+                    <h1>Add A New Book</h1>
                     <form>
-                        <label for="title">Title:</label>
+                        <label for="title">Title</label>
                         <input type="text" id="title" required>
 
-                        <label for="author">Author:</label>
+                        <label for="author">Author</label>
                         <input type="text" id="author" required>
 
-                        <label for="pages">Pages:</label>
-                        <input type="number" id="pages" required>
+                        <label for="pages">Pages</label>
+                        <input type="text" id="pages" maxlength="4" required>
 
-                        <label for="year">Year:</label>
-                        <input type="number" id="year" required>
+                        <label for="year">Year</label>
+                        <input type="text" id="year" maxlength="4" required>
 
-                        <label for="pages">Pages:</label>
-                        <input type="number" id="pages" required>
+                        <label for="status">Read Status</label>
+                        <select name="status" id="Read-Status">
+                            <option value="Read">Read</option>
+                            <option value="Not Read">Not Read</option>
+                        </select>
 
                         <button type="submit">Add Book</button>
                     </form>
