@@ -111,6 +111,10 @@ h2 {
     gap: .75rem;
 }
 
+.book-title {
+    font-size: 26px;
+}
+
 
 footer {
     margin-top: auto;
