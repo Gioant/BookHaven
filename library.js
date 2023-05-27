@@ -1,27 +1,43 @@
-function Book(title, author, pages, status) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.status = status;
-    this.info = function () {
-        return title + " by " + author + ", " + pages + ", " + status;
-    }
-}
-
-// const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", "295 pages", "not read yet");
-
-// console.log(theHobbit.info());
-
-
-
 let library = [];
 
 //constructor
-function Book() {
-
+function Book(title, author, pages, year, status) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.year = year;
+    this.status = status;
 }
 
 
 function addBooktoLibrary() {
 
+}
+
+
+
+// Get the modal
+var modalBox = document.getElementById('modal');
+
+// Get the button that opens the modal
+var modalBtn = document.getElementById("open-modal");
+
+// Get the <span> element that closes the modal
+var spanClose = document.getElementById("close");
+
+// When the user clicks the button, open the modal 
+modalBtn.onclick = function() {
+    modalBox.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+spanClose.onclick = function() {
+    modalBox.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modalBox) {
+        modalBox.style.display = "none";
+    }
 }
