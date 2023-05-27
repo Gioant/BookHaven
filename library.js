@@ -27,7 +27,8 @@ var spanClose = document.getElementById("close");
 
 // When the user clicks the button, open the modal 
 modalBtn.onclick = function() {
-    modalBox.style.display = "block";
+    modalBox.style.display = "flex";
+    modalBox.style.alignItems = "center";
 }
 
 // When the user clicks on <span> (x), close the modal
