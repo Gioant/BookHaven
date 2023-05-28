@@ -104,6 +104,27 @@ form input, select {
     border: 1px solid grey;
 }
 
+form select {
+    width: 100%;
+    border: none;
+}
+
+select:focus {
+    outline: none; /* Remove the default focus outline */
+    border-color: transparent; /* Set the border color to transparent when focused */
+}
+
+form div {
+    position: relative; /* Add position relative for focus styling */
+    background-color: white;
+    border-radius: 6px;
+    border: 1px solid grey;
+    padding-right: 1rem;
+}
+
+form div:focus-within {
+    outline: 5px auto -webkit-focus-ring-color;
+}
 
 form button {
     margin-top: 6%;
