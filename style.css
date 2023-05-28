@@ -127,6 +127,7 @@ form div:focus-within {
 }
 
 form button {
+    cursor: pointer;
     margin-top: 6%;
     padding: .75rem;
     border-radius: 6px;
@@ -139,6 +140,7 @@ form button {
 
 /* The Close Button */
 #close {
+    cursor: pointer;
     color: #aaaaaa;
     float: right;
     font-size: 28px;
@@ -165,6 +167,7 @@ h2 {
     border: none;
     background-color: unset;
     padding-left: .5rem;
+    cursor: pointer;
 }
 
 #book-add button img {
@@ -182,6 +185,7 @@ h2 {
     background-color: transparent;
     height: 25px;
     width: 25px;
+    cursor: pointer;
 }
 
 .card-books {
@@ -189,6 +193,15 @@ h2 {
     flex-direction: column;
     background-color: #F8F8FF;
     border-radius: 12px;
+}
+
+
+.top img {
+    aspect-ratio: 1 / 1;
+    height: auto;
+    border-radius: 2rem;
+    padding: 1rem;
+    width: 100%;
 }
 
 .bottom {
@@ -202,6 +215,18 @@ h2 {
     font-size: 26px;
 }
 
+.book-status{
+    background-color: transparent;
+    border: 1px solid #808080;
+    border-radius: 8px;
+}
+
+.book-status:hover {
+    color: #333;
+    border-color: #888;
+    outline: 0;
+    cursor: pointer;
+}
 
 footer {
     margin-top: auto;
