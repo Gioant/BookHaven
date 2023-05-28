@@ -18,7 +18,11 @@ const bookStatusButton = document.getElementsByClassName('.book-status');
 
 
 //add functions using event listeners for validation for form inputs
-authorInput.addEventListener("input", validateAuthor);
+authorInput.addEventListener("input", validateLetters);
+titleInput.addEventListener("input", validateLetters);
+
+pagesInput.addEventListener("input", validateNumbers);
+yearInput.addEventListener("input", validateNumbers);
 
 
 /* ====== MODAL LOGIC ====== */
@@ -52,18 +56,25 @@ window.onclick = function(event) {
 
 
 /* ======= VALIDATE FORM SECTION =======  */
-//function for validating first & last name
-function validateAuthor(event) {
+//function for validating for letters only
+function validateLetters(event) {
     const value = event.target.value;
 
     //replace any characters that is not a letter with empty ""
-    const newValue = value.replace(/[^a-zA-Z]/g, "");
+    const finalValue = value.replace(/[^a-zA-Z]/g, "");
 
     // Set the value of the input element to the cleaned and formatted value
-    event.target.value = finalValue;
+    return event.target.value = finalValue;
 }
 
+//function to validate for numbers only
+function validateNumbers(event) {
+    let valueInput = event.target;
 
+    let finalValue = valueInput.value.replace(/[^0-9]/g, "");
+
+    return event.target.value = finalValue;
+}
 
 
 
