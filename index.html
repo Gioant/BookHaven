@@ -38,16 +38,16 @@
 
 
                         <label for="title">Title</label>
-                        <input type="text" id="title" required>
+                        <input type="text" id="title" minlength="3" required>
 
                         <label for="author">Author</label>
-                        <input type="text" id="author" required>
+                        <input type="text" id="author" min="3" required>
 
                         <label for="pages">Pages</label>
-                        <input type="text" id="pages" maxlength="4" required>
+                        <input type="text" id="pages" minlength="2" maxlength="4" required>
 
                         <label for="year">Year</label>
-                        <input type="text" id="year" maxlength="4" required>
+                        <input type="text" id="year" minlength="4" maxlength="4" required>
 
                         <label for="status">Read Status</label>
                         <div>
@@ -64,7 +64,7 @@
 
             <div class="card-books">
                 <div class="top">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/e/e4/Ender%27s_game_cover_ISBN_0312932081.jpg" alt="">
+                    <img class="book-image"src="https://upload.wikimedia.org/wikipedia/en/e/e4/Ender%27s_game_cover_ISBN_0312932081.jpg">
                 </div>
 
                 <div class="bottom">
