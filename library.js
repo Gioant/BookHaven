@@ -56,6 +56,14 @@ window.onclick = function (event) {
     }
 }
 
+/* manually add 3 books  */
+function addBooksManually(){
+    const book1 = new Book("https://rb.gy/7lrnm", "Ender's Game", "Orson Scott card", "374 pages", "1985", "Read");
+    const book2 = new Book("https://rb.gy/l0dsf", "The Westing Game", "Ellen Raskin", "216 pages", "1978", "Read");
+    const book3 = new Book("https://rb.gy/nfvp8", "Fahrenheit 451", "Ray Bradbury", "158", "1953", "Not Read");
+
+    library.push(book1, book2, book3);
+}
 
 
 /* ======= VALIDATE FORM SECTION =======  */
@@ -72,21 +80,36 @@ function validateLetters(event) {
 
 //function to validate for numbers only
 function validateNumbers(event) {
-    let valueInput = event.target;
+    let valueInput = event.target.value;
 
     let finalValue = valueInput.value.replace(/[^0-9]/g, "");
 
     return event.target.value = finalValue;
 }
 
-function validateImage(event){
-    
+
+function validateImage(event) {
+
+    const url = event.target.value;
+
+    const imageExtensions = ['.png', '.jpg', '.jpeg'];
+    const fileExtension = url.substring(url.lastIndexOf('.')).toLowerCase();
+
+
+    if (imageExtensions.includes(fileExtension)) {
+        return url;
+    } else {
+        const defaultImg = "https://rb.gy/od0ge";
+        return defaultImg;
+    }
 }
 
 //function to prevent form of submitting
 function formSubmit(event) {
     event.preventDefault();
-    addtobooklibrary();
+    
+    const imgLinkValue = imgInput.value;
+    addBooktoLibrary(imgLinkValue);
 }
 
 
@@ -95,7 +118,8 @@ function formSubmit(event) {
 let library = [];
 
 //constructor
-function Book(title, author, pages, year, status) {
+function Book(bookCover,title, author, pages, year, status) {
+    this.bookCover = bookCover;
     this.title = title;
     this.author = author;
     this.pages = pages;
@@ -104,14 +128,16 @@ function Book(title, author, pages, year, status) {
 }
 
 
-function addBooktoLibrary() {
-    let imgLinkValue = imgInput.value;
-    let titleValue = titleInput.value;
-    let authorValue = authorInput.value;
-    let pagesValue = pagesInput.value;
-    let yearValue = yearInput.value;
-    let readStatusValue = readStatusInput.value;
+function addBooktoLibrary(imgLinkValue) {
+    const bookCoverValue = imgLinkValue;
+    const titleValue = titleInput.value;
+    const authorValue = authorInput.value;
+    const pagesValue = pagesInput.value;
+    const yearValue = yearInput.value;
+    const readStatusValue = readStatusInput.value;
 
+    const newUserBook = new Book(bookCoverValue, titleValue, authorValue, pagesValue, yearValue, readStatusValue);
 
+    library.push(newUserBook);
 
 }
