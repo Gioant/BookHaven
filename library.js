@@ -7,6 +7,7 @@ const authorInput = document.getElementById('author');
 const pagesInput = document.getElementById('pages');
 const yearInput = document.getElementById('year');
 const readStatusInput = document.getElementById('Read-Status');
+const submitBtn = document.getElementById("book-submit");
 
 // Get the div elements for displaying book details
 const bookImageDiv = document.getElementsByClassName('.book-image');
@@ -18,11 +19,13 @@ const bookStatusButton = document.getElementsByClassName('.book-status');
 
 
 //add functions using event listeners for validation for form inputs
+imgInput.addEventListener("blur", validateImage);
 authorInput.addEventListener("input", validateLetters);
 titleInput.addEventListener("input", validateLetters);
 
 pagesInput.addEventListener("input", validateNumbers);
 yearInput.addEventListener("input", validateNumbers);
+submitBtn.addEventListener("submit", formSubmit);
 
 
 /* ====== MODAL LOGIC ====== */
@@ -36,18 +39,18 @@ const modalBtn = document.getElementById("open-modal");
 const spanClose = document.getElementById("close");
 
 // When the user clicks the button, open the modal 
-modalBtn.onclick = function() {
+modalBtn.onclick = function () {
     modalBox.style.display = "flex";
     modalBox.style.alignItems = "center";
 }
 
 // When the user clicks on <span> (x), close the modal
-spanClose.onclick = function() {
+spanClose.onclick = function () {
     modalBox.style.display = "none";
 }
 
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
+window.onclick = function (event) {
     if (event.target == modalBox) {
         modalBox.style.display = "none";
     }
@@ -76,6 +79,15 @@ function validateNumbers(event) {
     return event.target.value = finalValue;
 }
 
+function validateImage(event){
+    
+}
+
+//function to prevent form of submitting
+function formSubmit(event) {
+    event.preventDefault();
+    addtobooklibrary();
+}
 
 
 
@@ -93,5 +105,13 @@ function Book(title, author, pages, year, status) {
 
 
 function addBooktoLibrary() {
+    let imgLinkValue = imgInput.value;
+    let titleValue = titleInput.value;
+    let authorValue = authorInput.value;
+    let pagesValue = pagesInput.value;
+    let yearValue = yearInput.value;
+    let readStatusValue = readStatusInput.value;
+
+
 
 }
