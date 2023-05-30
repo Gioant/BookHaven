@@ -1,6 +1,4 @@
 // get necessary elements
-
-// Get the form inputs
 const imgInput = document.getElementById('img-link');
 const titleInput = document.getElementById('title');
 const authorInput = document.getElementById('author');
@@ -56,35 +54,6 @@ window.onclick = function (event) {
     }
 }
 
-/* manually add 3 books  */
-function addBooksManually() {
-    const book1 = new Book(
-        "https://rb.gy/7lrnm",
-        "Ender's Game",
-        "Orson Scott card",
-        "374 pages", "1985",
-        "Read");
-
-    const book2 = new Book(
-        "https://rb.gy/l0dsf",
-        "The Westing Game",
-        "Ellen Raskin",
-        "216 pages",
-        "1978",
-        "Read");
-
-    const book3 = new Book(
-        "https://rb.gy/nfvp8",
-        "Fahrenheit 451",
-        "Ray Bradbury",
-        "158",
-        "1953",
-        "Not Read");
-
-    library.push(book1, book2, book3);
-}
-
-
 /* ======= VALIDATE FORM SECTION =======  */
 //function for validating for letters only
 function validateLetters(event) {
@@ -118,7 +87,7 @@ function validateImage(event) {
     if (imageExtensions.includes(fileExtension)) {
         return url;
     } else {
-        const defaultImg = "https://rb.gy/od0ge";
+        const defaultImg = "https://islandpress.org/sites/default/files/default_book_cover_2015.jpg";
         return defaultImg;
     }
 }
@@ -127,7 +96,8 @@ function validateImage(event) {
 function formSubmit(event) {
     event.preventDefault();
 
-    const imgLinkValue = imgInput.value;
+    //make sure to save the return value from validate function (whether default or one entered by user)
+    const imgLinkValue = validateImage(imgInput.value);
     addBooktoLibrary(imgLinkValue);
 }
 
@@ -158,9 +128,53 @@ function addBooktoLibrary(imgLinkValue) {
     const newUserBook = new Book(bookCoverValue, titleValue, authorValue, pagesValue, yearValue, readStatusValue);
 
     library.push(newUserBook);
+
+    displayBooks();
+}
+
+/* manually add 3 books  */
+function addBooksManually() {
+    const book1 = new Book(
+        "https://upload.wikimedia.org/wikipedia/en/e/e4/Ender%27s_game_cover_ISBN_0312932081.jpg",
+        "Ender's Game",
+        "Orson Scott card",
+        "374 pages", "1985",
+        "Read");
+
+    const book2 = new Book(
+        "https://dynamic.indigoimages.ca/v1/books/books/0140386645/1.jpg",
+        "The Westing Game",
+        "Ellen Raskin",
+        "216 pages",
+        "1978",
+        "Read");
+
+    const book3 = new Book(
+        "https://cdn.shoplightspeed.com/shops/648404/files/42832083/1652x2313x2/fahrenheit-451-by-ray-bradbury.jpg",
+        "Fahrenheit 451",
+        "Ray Bradbury",
+        "158",
+        "1953",
+        "Not Read");
+
+    library.push(book1, book2, book3);
+
+    // Call createBookElement for each book and append the book elements to the library container
+    const libraryContainer = document.getElementById("library-container");
+    const bookElements = [book1, book2, book3].map((book, index) =>
+        createBookElement(book, index)
+    );
+    bookElements.forEach((bookElement) => {
+        libraryContainer.appendChild(bookElement);
+    });
+
+
+    //call function to displayBook
+    displayBooks();
 }
 
 
+//function to displayBook inside section element
 function displayBooks() {
     const libraryContainer = document.getElementById('library-container');
 
@@ -174,7 +188,7 @@ function displayBooks() {
 }
 
 
-
+//function to create the book from form inputs
 function createBookElement(book, index) {
     const bookElement = document.createElement('div');
     bookElement.classList.add('card-books');
@@ -228,3 +242,9 @@ function createBookElement(book, index) {
 
     return bookElement;
 }
+
+
+//load books manually
+document.addEventListener("DOMContentLoaded", function () {
+    addBooksManually();
+});
