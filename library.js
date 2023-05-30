@@ -136,7 +136,7 @@ function addBooktoLibrary(imgLinkValue) {
 function addBooksManually() {
     const book1 = new Book(
         "https://upload.wikimedia.org/wikipedia/en/e/e4/Ender%27s_game_cover_ISBN_0312932081.jpg",
-        "Ender's Game",
+        "The Ender's Game",
         "Orson Scott card",
         "374 pages", "1985",
         "Read");
@@ -150,7 +150,7 @@ function addBooksManually() {
         "Read");
 
     const book3 = new Book(
-        "https://cdn.shoplightspeed.com/shops/648404/files/42832083/1652x2313x2/fahrenheit-451-by-ray-bradbury.jpg",
+        "https://i0.wp.com/booksofbrilliance.com/wp-content/uploads/2020/06/4956476726_26b690b952_c.jpg",
         "Fahrenheit 451",
         "Ray Bradbury",
         "158",
