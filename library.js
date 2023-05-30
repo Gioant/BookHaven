@@ -10,12 +10,12 @@ const readStatusInput = document.getElementById('Read-Status');
 const submitBtn = document.getElementById("book-submit");
 
 // Get the div elements for displaying book details
-const bookImageDiv = document.getElementsByClassName('.book-image');
-const bookTitleDiv = document.getElementsByClassName('.book-title');
-const bookAuthorDiv = document.getElementsByClassName('.book-author');
-const bookPagesDiv = document.getElementsByClassName('.book-pages');
-const bookYearDiv = document.getElementsByClassName('.book-year');
-const bookStatusButton = document.getElementsByClassName('.book-status');
+const bookImageDiv = document.getElementsByClassName('book-image');
+const bookTitleDiv = document.getElementsByClassName('book-title');
+const bookAuthorDiv = document.getElementsByClassName('book-author');
+const bookPagesDiv = document.getElementsByClassName('book-pages');
+const bookYearDiv = document.getElementsByClassName('book-year');
+const bookStatusButton = document.getElementsByClassName('book-status');
 
 
 //add functions using event listeners for validation for form inputs
@@ -25,7 +25,7 @@ titleInput.addEventListener("input", validateLetters);
 
 pagesInput.addEventListener("input", validateNumbers);
 yearInput.addEventListener("input", validateNumbers);
-submitBtn.addEventListener("submit", formSubmit);
+submitBtn.addEventListener("click", formSubmit);
 
 
 /* ====== MODAL LOGIC ====== */
@@ -57,10 +57,29 @@ window.onclick = function (event) {
 }
 
 /* manually add 3 books  */
-function addBooksManually(){
-    const book1 = new Book("https://rb.gy/7lrnm", "Ender's Game", "Orson Scott card", "374 pages", "1985", "Read");
-    const book2 = new Book("https://rb.gy/l0dsf", "The Westing Game", "Ellen Raskin", "216 pages", "1978", "Read");
-    const book3 = new Book("https://rb.gy/nfvp8", "Fahrenheit 451", "Ray Bradbury", "158", "1953", "Not Read");
+function addBooksManually() {
+    const book1 = new Book(
+        "https://rb.gy/7lrnm",
+        "Ender's Game",
+        "Orson Scott card",
+        "374 pages", "1985",
+        "Read");
+
+    const book2 = new Book(
+        "https://rb.gy/l0dsf",
+        "The Westing Game",
+        "Ellen Raskin",
+        "216 pages",
+        "1978",
+        "Read");
+
+    const book3 = new Book(
+        "https://rb.gy/nfvp8",
+        "Fahrenheit 451",
+        "Ray Bradbury",
+        "158",
+        "1953",
+        "Not Read");
 
     library.push(book1, book2, book3);
 }
@@ -72,7 +91,7 @@ function validateLetters(event) {
     const value = event.target.value;
 
     //replace any characters that is not a letter with empty ""
-    const finalValue = value.replace(/[^a-zA-Z]/g, "");
+    const finalValue = value.replace(/[^a-zA-Z',\s]/g, "");
 
     // Set the value of the input element to the cleaned and formatted value
     return event.target.value = finalValue;
@@ -80,9 +99,9 @@ function validateLetters(event) {
 
 //function to validate for numbers only
 function validateNumbers(event) {
-    let valueInput = event.target.value;
+    let value = event.target.value;
 
-    let finalValue = valueInput.value.replace(/[^0-9]/g, "");
+    let finalValue = value.replace(/[^0-9]/g, "");
 
     return event.target.value = finalValue;
 }
@@ -107,18 +126,18 @@ function validateImage(event) {
 //function to prevent form of submitting
 function formSubmit(event) {
     event.preventDefault();
-    
+
     const imgLinkValue = imgInput.value;
     addBooktoLibrary(imgLinkValue);
 }
 
 
 
-
+/* ======= START OF ADD BOOK LOGIC ====== */
 let library = [];
 
 //constructor
-function Book(bookCover,title, author, pages, year, status) {
+function Book(bookCover, title, author, pages, year, status) {
     this.bookCover = bookCover;
     this.title = title;
     this.author = author;
@@ -127,7 +146,7 @@ function Book(bookCover,title, author, pages, year, status) {
     this.status = status;
 }
 
-
+//function to add book object to library & call function to displayBook on page
 function addBooktoLibrary(imgLinkValue) {
     const bookCoverValue = imgLinkValue;
     const titleValue = titleInput.value;
@@ -139,5 +158,73 @@ function addBooktoLibrary(imgLinkValue) {
     const newUserBook = new Book(bookCoverValue, titleValue, authorValue, pagesValue, yearValue, readStatusValue);
 
     library.push(newUserBook);
+}
 
+
+function displayBooks() {
+    const libraryContainer = document.getElementById('library-container');
+
+    // Clear the container before adding books
+    libraryContainer.innerHTML = '';
+
+    library.forEach((book, index) => {
+        const bookElement = createBookElement(book, index);
+        libraryContainer.appendChild(bookElement);
+    });
+}
+
+
+
+function createBookElement(book, index) {
+    const bookElement = document.createElement('div');
+    bookElement.classList.add('card-books');
+    bookElement.setAttribute("data-index", index);
+
+    const topDiv = document.createElement('div');
+    topDiv.classList.add('top');
+    bookElement.appendChild(topDiv);
+
+    const imageElement = document.createElement('img');
+    imageElement.classList.add('book-image');
+    imageElement.src = book.bookCover;
+    topDiv.appendChild(imageElement);
+
+    const bottomDiv = document.createElement('div');
+    bottomDiv.classList.add('bottom');
+    bookElement.appendChild(bottomDiv);
+
+    const titleElement = document.createElement('h3');
+    titleElement.classList.add('book-title');
+    titleElement.textContent = book.title;
+    bottomDiv.appendChild(titleElement);
+
+    const authorElement = document.createElement('p');
+    authorElement.classList.add('book-author');
+    authorElement.textContent = book.author;
+    bottomDiv.appendChild(authorElement);
+
+    const pagesElement = document.createElement('p');
+    pagesElement.classList.add('book-pages');
+    pagesElement.textContent = book.pages;
+    bottomDiv.appendChild(pagesElement);
+
+    const yearElement = document.createElement('p');
+    yearElement.classList.add('book-year');
+    yearElement.textContent = book.year;
+    bottomDiv.appendChild(yearElement);
+
+    const statusButton = document.createElement('button');
+    statusButton.classList.add('book-status');
+    statusButton.textContent = book.status;
+    bottomDiv.appendChild(statusButton);
+
+    const removeButton = document.createElement('button');
+    removeButton.classList.add('remove');
+    const removeIcon = document.createElement('img');
+    removeIcon.src = './images/trash.png';
+    removeIcon.alt = 'trash-delete';
+    removeButton.appendChild(removeIcon);
+    bottomDiv.appendChild(removeButton);
+
+    return bookElement;
 }
