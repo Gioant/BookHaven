@@ -15,9 +15,6 @@ const bookPagesDiv = document.getElementsByClassName('book-pages');
 const bookYearDiv = document.getElementsByClassName('book-year');
 const bookStatusButton = document.getElementsByClassName('book-status');
 
-//get button to delete book
-const removeBtns = document.querySelectorAll(".remove");
-
 
 //add functions using event listeners for validation for form inputs
 imgInput.addEventListener("blur", validateImage);
@@ -292,24 +289,7 @@ function createBookElement(book, index) {
     return bookElement;
 }
 
-//function to remove book
-function removeBook(card) {
-    // Get the data-index attribute of the card
-    const dataIndex = card.getAttribute('data-index');
-
-    // Remove the card from the DOM
-    card.remove();
-
-    // Remove the book from the library array using its index
-    library.splice(dataIndex, 1);
-
-    // Update the data-index attribute of the remaining cards
-    const cards = document.querySelectorAll('.card-books');
-    cards.forEach((card, index) => {
-        card.setAttribute('data-index', index);
-    });
-}
-
+//function to change book status to read or not read
 function changeBookStatus(card) {
     // Get the data-index attribute of the card
     const dataIndex = card.getAttribute('data-index');
@@ -331,8 +311,7 @@ function changeBookStatus(card) {
 }
 
 
-
-//load books manually
+//load books manually after DOM is loaded
 document.addEventListener("DOMContentLoaded", function () {
     addBooksManually();
 });
