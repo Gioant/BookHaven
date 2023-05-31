@@ -15,6 +15,9 @@ const bookPagesDiv = document.getElementsByClassName('book-pages');
 const bookYearDiv = document.getElementsByClassName('book-year');
 const bookStatusButton = document.getElementsByClassName('book-status');
 
+//get button to delete book
+const removeBtns = document.querySelectorAll(".remove");
+
 
 //add functions using event listeners for validation for form inputs
 imgInput.addEventListener("blur", validateImage);
@@ -180,6 +183,14 @@ function addBooksManually() {
         "Read");
 
     const book2 = new Book(
+        "https://i0.wp.com/booksofbrilliance.com/wp-content/uploads/2020/06/4956476726_26b690b952_c.jpg",
+        "Fahrenheit 451",
+        "Ray Bradbury",
+        "158",
+        "1953",
+        "Not Read");
+
+    const book3 = new Book(
         "https://dynamic.indigoimages.ca/v1/books/books/0140386645/1.jpg",
         "The Westing Game",
         "Ellen Raskin",
@@ -187,13 +198,6 @@ function addBooksManually() {
         "1978",
         "Read");
 
-    const book3 = new Book(
-        "https://i0.wp.com/booksofbrilliance.com/wp-content/uploads/2020/06/4956476726_26b690b952_c.jpg",
-        "Fahrenheit 451",
-        "Ray Bradbury",
-        "158",
-        "1953",
-        "Not Read");
 
     library.push(book1, book2, book3);
 
@@ -268,6 +272,13 @@ function createBookElement(book, index) {
     const statusButton = document.createElement('button');
     statusButton.classList.add('book-status');
     statusButton.textContent = book.status;
+
+    if (statusButton.textContent === "Read") {
+        statusButton.style.backgroundColor = '#32CD32';
+    } else {
+        statusButton.style.backgroundColor = '#FF004F';
+    }
+
     bottomDiv.appendChild(statusButton);
 
     const removeButton = document.createElement('button');
@@ -281,8 +292,69 @@ function createBookElement(book, index) {
     return bookElement;
 }
 
+//function to remove book
+function removeBook(card) {
+    // Get the data-index attribute of the card
+    const dataIndex = card.getAttribute('data-index');
+
+    // Remove the card from the DOM
+    card.remove();
+
+    // Remove the book from the library array using its index
+    library.splice(dataIndex, 1);
+
+    // Update the data-index attribute of the remaining cards
+    const cards = document.querySelectorAll('.card-books');
+    cards.forEach((card, index) => {
+        card.setAttribute('data-index', index);
+    });
+}
+
+function changeBookStatus(card) {
+    // Get the data-index attribute of the card
+    const dataIndex = card.getAttribute('data-index');
+
+    const statusText = card.querySelector('.book-status');
+
+    // Update the book status in the library array
+    if (library[dataIndex].status === 'Read') {
+        library[dataIndex].status = 'Not Read';
+        statusText.style.backgroundColor = '#FF004F';
+
+    } else {
+        library[dataIndex].status = 'Read';
+        statusText.style.backgroundColor = '#32CD32';
+    }
+
+
+    statusText.textContent = library[dataIndex].status;
+}
+
+
 
 //load books manually
 document.addEventListener("DOMContentLoaded", function () {
     addBooksManually();
+});
+
+
+// Add event listener to the parent element using event delegation
+document.querySelector('section').addEventListener('click', function (e) {
+    // Check if the clicked element is a remove button
+    if (e.target.classList.contains('remove')) {
+        // Get the parent card element
+        const card = e.target.closest('.card-books');
+
+        // Call the removeBook function
+        removeBook(card);
+    }
+
+    // Check if the clicked element is a book status button
+    if (e.target.classList.contains('book-status')) {
+        // Get the parent card element
+        const card = e.target.closest('.card-books');
+
+        // Call the changeBookStatus function
+        changeBookStatus(card);
+    }
 });
