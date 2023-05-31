@@ -37,7 +37,7 @@ const modalBtn = document.getElementById("open-modal");
 const spanClose = document.getElementById("close");
 
 // When the user clicks the button, open the modal 
-modalBtn.onclick = function (){
+modalBtn.onclick = function () {
     modalBox.style.display = "flex";
     modalBox.style.alignItems = "center";
 }
@@ -97,10 +97,34 @@ function validateImage(imageUrl) {
 function formSubmit(event) {
     event.preventDefault();
 
-    //make sure to save the return value from validate function (whether default or one entered by user)
-    const imgLinkValue = validateImage(imgInput.value);
-    addBooktoLibrary(imgLinkValue);
+    // Check for empty form inputs and validate minlength
+    const inputs = [titleInput, authorInput, pagesInput, yearInput, readStatusInput];
+    let allInputsFilled = true;
+
+    inputs.forEach(input => {
+        if (input.value.trim() === '') {
+            input.style.borderColor = 'red';
+            allInputsFilled = false;
+        } else {
+            input.style.borderColor = ''; // Reset the border color if not empty
+        }
+
+        if (input.getAttribute('minlength') && input.value.trim().length < parseInt(input.getAttribute('minlength'))) {
+            input.setCustomValidity(`Please enter at least ${input.getAttribute('minlength')} characters.`);
+            input.reportValidity();
+            allInputsFilled = false;
+        } else {
+            input.setCustomValidity(''); // Reset the custom validity message
+        }
+    });
+
+    if (allInputsFilled) {
+        // Make sure to save the return value from the validate function (whether default or one entered by the user)
+        const imgLinkValue = validateImage(imgInput.value);
+        addBooktoLibrary(imgLinkValue);
+    }
 }
+
 
 
 
@@ -139,7 +163,7 @@ function addBooksManually() {
         "https://upload.wikimedia.org/wikipedia/en/e/e4/Ender%27s_game_cover_ISBN_0312932081.jpg",
         "The Ender's Game",
         "Orson Scott card",
-        "374", 
+        "374",
         "1985",
         "Read");
 
@@ -221,7 +245,7 @@ function createBookElement(book, index) {
 
     const pagesElement = document.createElement('p');
     pagesElement.classList.add('book-pages');
-    pagesElement.textContent = book.pages + ' pages'; 
+    pagesElement.textContent = book.pages + ' pages';
     bottomDiv.appendChild(pagesElement);
 
     const yearElement = document.createElement('p');
