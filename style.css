@@ -60,11 +60,11 @@ footer {
 }
 
 section {
-    max-width: 1280px;
+    max-width: 960px;
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
-    padding-top: 2rem;
+    padding-top: 1rem;
 }
 
 /* Modal  */
@@ -164,8 +164,7 @@ h2 {
 }
 
 #book-add {
-    padding-top: 1.5rem;
-    padding-bottom: .5rem;
+    padding-top: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -207,7 +206,7 @@ h2 {
     display: flex;
     flex-direction: column;
     width: 30%;
-    height: 72%;
+    height: 70%;
     background-color: #F8F8FF;
     border-radius: 12px;
 }
@@ -223,7 +222,7 @@ h2 {
 }
 
 .bottom {
-    padding: .75rem 1rem;
+    padding: 0 1rem .75rem 1rem;
     display: inherit;
     flex-direction: inherit;
     gap: .75rem;
