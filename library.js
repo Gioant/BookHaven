@@ -37,7 +37,7 @@ const modalBtn = document.getElementById("open-modal");
 const spanClose = document.getElementById("close");
 
 // When the user clicks the button, open the modal 
-modalBtn.onclick = function () {
+modalBtn.onclick = function (){
     modalBox.style.display = "flex";
     modalBox.style.alignItems = "center";
 }
@@ -76,19 +76,20 @@ function validateNumbers(event) {
 }
 
 
-function validateImage(event) {
+function validateImage(imageUrl) {
+    const trimmedUrl = imageUrl.trim();
 
-    const url = event.target.value;
+    if (trimmedUrl === '') {
+        return "https://islandpress.org/sites/default/files/default_book_cover_2015.jpg";
+    }
 
     const imageExtensions = ['.png', '.jpg', '.jpeg'];
-    const fileExtension = url.substring(url.lastIndexOf('.')).toLowerCase();
-
+    const fileExtension = trimmedUrl.substring(trimmedUrl.lastIndexOf('.')).toLowerCase();
 
     if (imageExtensions.includes(fileExtension)) {
-        return url;
+        return trimmedUrl;
     } else {
-        const defaultImg = "https://islandpress.org/sites/default/files/default_book_cover_2015.jpg";
-        return defaultImg;
+        return "https://islandpress.org/sites/default/files/default_book_cover_2015.jpg";
     }
 }
 
@@ -138,14 +139,15 @@ function addBooksManually() {
         "https://upload.wikimedia.org/wikipedia/en/e/e4/Ender%27s_game_cover_ISBN_0312932081.jpg",
         "The Ender's Game",
         "Orson Scott card",
-        "374 pages", "1985",
+        "374", 
+        "1985",
         "Read");
 
     const book2 = new Book(
         "https://dynamic.indigoimages.ca/v1/books/books/0140386645/1.jpg",
         "The Westing Game",
         "Ellen Raskin",
-        "216 pages",
+        "216",
         "1978",
         "Read");
 
@@ -219,7 +221,7 @@ function createBookElement(book, index) {
 
     const pagesElement = document.createElement('p');
     pagesElement.classList.add('book-pages');
-    pagesElement.textContent = book.pages;
+    pagesElement.textContent = book.pages + ' pages'; 
     bottomDiv.appendChild(pagesElement);
 
     const yearElement = document.createElement('p');
