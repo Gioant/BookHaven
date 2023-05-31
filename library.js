@@ -72,7 +72,7 @@ function validateTitle(event) {
     const value = event.target.value;
 
     //replace any characters that is not a letter with empty ""
-    const finalValue = value.replace(/[^a-zA-Z0-9',\s]/g, "");
+    const finalValue = value.replace(/[^a-zA-Z0-9',:\s]/g, "");
 
     // Set the value of the input element to the cleaned and formatted value
     return event.target.value = finalValue;
