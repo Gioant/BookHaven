@@ -311,6 +311,19 @@ function changeBookStatus(card) {
 }
 
 
+// Function to remove a book from the DOM and library array
+function removeBook(card) {
+    // Get the data-index attribute of the card
+    const dataIndex = card.getAttribute('data-index');
+
+    // Remove the card element from the DOM
+    card.remove();
+
+    // Remove the book from the library array
+    library.splice(dataIndex, 1);
+}
+
+
 //load books manually after DOM is loaded
 document.addEventListener("DOMContentLoaded", function () {
     addBooksManually();
@@ -319,15 +332,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Add event listener to the parent element using event delegation
 document.querySelector('section').addEventListener('click', function (e) {
-    // Check if the clicked element is a remove button
-    if (e.target.classList.contains('remove')) {
+    // Check if the clicked element or its parent is a remove button
+    if (e.target.parentElement.classList.contains('remove')) {
         // Get the parent card element
         const card = e.target.closest('.card-books');
 
         // Call the removeBook function
         removeBook(card);
     }
-
     // Check if the clicked element is a book status button
     if (e.target.classList.contains('book-status')) {
         // Get the parent card element
