@@ -36,6 +36,7 @@ main {
     flex-direction: column;
     align-items: center;
     flex: 1;
+    padding-bottom: 2rem;
 }
 
 header div {
@@ -230,6 +231,18 @@ h2 {
 
 .book-title {
     font-size: 26px;
+}
+
+
+.book-title {
+    font-size: 26px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.book-title:hover {
+    white-space: normal;
 }
 
 .book-status {
