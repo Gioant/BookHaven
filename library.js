@@ -19,11 +19,12 @@ const bookStatusButton = document.getElementsByClassName('book-status');
 //add functions using event listeners for validation for form inputs
 imgInput.addEventListener("blur", validateImage);
 authorInput.addEventListener("input", validateLetters);
-titleInput.addEventListener("input", validateLetters);
+titleInput.addEventListener("input", validateTitle);
 
 pagesInput.addEventListener("input", validateNumbers);
 yearInput.addEventListener("input", validateNumbers);
 submitBtn.addEventListener("click", formSubmit);
+
 
 
 /* ====== MODAL LOGIC ====== */
@@ -61,6 +62,17 @@ function validateLetters(event) {
 
     //replace any characters that is not a letter with empty ""
     const finalValue = value.replace(/[^a-zA-Z',\s]/g, "");
+
+    // Set the value of the input element to the cleaned and formatted value
+    return event.target.value = finalValue;
+}
+
+//function for validating title 
+function validateTitle(event) {
+    const value = event.target.value;
+
+    //replace any characters that is not a letter with empty ""
+    const finalValue = value.replace(/[^a-zA-Z0-9',\s]/g, "");
 
     // Set the value of the input element to the cleaned and formatted value
     return event.target.value = finalValue;
