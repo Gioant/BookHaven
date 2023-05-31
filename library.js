@@ -1,4 +1,4 @@
-// get necessary elements
+// get necessary form elements
 const imgInput = document.getElementById('img-link');
 const titleInput = document.getElementById('title');
 const authorInput = document.getElementById('author');
