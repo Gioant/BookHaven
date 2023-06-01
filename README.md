@@ -1,4 +1,6 @@
-# Library JavaScript Project
+# BookHaven
+
+## Description
 
 This is a small library app project created with JavaScript. To put in practice Object oriented principles using objects & objects constructors to create a book.
 
