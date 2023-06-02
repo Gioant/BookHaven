@@ -138,6 +138,16 @@ form div:focus-within {
     outline: 5px auto -webkit-focus-ring-color;
 }
 
+
+.alert-title {
+    color: #32CD32;
+}
+
+#swal2-html-container {
+    color: #fff;
+}
+
+
 #book-submit {
     cursor: pointer;
     margin-top: 6%;
@@ -308,7 +318,7 @@ footer img {
 }
 
 
-@media only screen and (max-width: 640px)  {
+@media only screen and (max-width: 640px) {
     h2 {
         font-size: 28px;
     }
