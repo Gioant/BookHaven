@@ -6,7 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BookHaven: Library Project</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.10/dist/sweetalert2.min.css" integrity="sha256-3Rcp1SEeC4XehtbH5UhZ2lYMlPfanMAjhcyh/Dwu1Ac="
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-borderless@5.0.15/borderless.min.css"
+        integrity="sha256-AoNcDUx+PZCUQhUrYn7OGBcOJivdFQYODnn9taDYh/k=" crossorigin="anonymous">
 </head>
 
 <body>
@@ -21,13 +25,13 @@
         <div id="book-add">
             <h2>Your Online Library Hub</h2>
             <div id="btm">
-            <p>Click this button to add a book</p>
+                <p>Click this button to add a book</p>
                 <button id="open-modal">
                     <img src="./images/add.png" alt="add icon">
                 </button>
             </div>
 
-                        <!-- MODAL POP UP   -->
+            <!-- MODAL POP UP   -->
             <div id="modal">
                 <div id="modal-content">
                     <span id="close">&times;</span>
@@ -41,10 +45,10 @@
                         <input type="text" id="title" minlength="3" maxlength="40" required>
 
                         <label for="author">Author</label>
-                        <input type="text" id="author" minlength="3" required >
+                        <input type="text" id="author" minlength="3" required>
 
                         <label for="pages">Pages</label>
-                        <input type="text" id="pages" minlength="2" maxlength="4" required> 
+                        <input type="text" id="pages" minlength="2" maxlength="4" required>
 
                         <label for="year">Year</label>
                         <input type="text" id="year" minlength="4" maxlength="4" required>
@@ -85,6 +89,8 @@
             </div>
         </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.10/dist/sweetalert2.all.min.js" integrity="sha256-eec5eLzX8mM4lR2i7HQXsjA8wFQv+CAjra5tB1p0230="
+        crossorigin="anonymous"></script>
     <script src="./library.js"></script>
 </body>
 
