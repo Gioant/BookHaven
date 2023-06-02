@@ -1,7 +1,7 @@
 # BookHaven
-
-Demo:
 ![bookhaven](https://github.com/Gioant/BookHaven/assets/66393141/899823db-78ae-4d58-82af-77c39e0e8737)
+
+live preview here: [Demo](https://gioant.github.io/BookHaven/)
 
 ## Description
 
