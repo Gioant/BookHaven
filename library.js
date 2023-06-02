@@ -134,6 +134,19 @@ function formSubmit(event) {
         // Make sure to save the return value from the validate function (whether default or one entered by the user)
         const imgLinkValue = validateImage(imgInput.value);
         addBooktoLibrary(imgLinkValue);
+
+        // Show SweetAlert2 pop-up
+        Swal.fire({
+            title: 'Success!',
+            text: 'Book Successfully Added To Library.',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            customClass: {
+                title: 'alert-title',
+                text: 'alert-text'
+            },
+            theme: 'Borderless'
+        });
     }
 }
 
