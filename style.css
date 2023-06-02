@@ -114,6 +114,8 @@ select {
 form select {
     width: 100%;
     border: none;
+    background-color: #fff;
+    color: #000000;
 }
 
 select:focus {
