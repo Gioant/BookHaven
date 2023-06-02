@@ -5,7 +5,7 @@ live preview here: [Demo](https://gioant.github.io/BookHaven/)
 
 ## Description
 
-This is a small library app project created with JavaScript. To put in practice Object oriented principles using objects & objects constructors to create a book.
+This is a small library app project created with JavaScript, Fully Responsive. To put in practice Object oriented principles using objects & objects constructors to create a book.
 
 
 
