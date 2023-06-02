@@ -1,5 +1,8 @@
 # BookHaven
 
+Demo:
+![bookhaven](https://github.com/Gioant/BookHaven/assets/66393141/899823db-78ae-4d58-82af-77c39e0e8737)
+
 ## Description
 
 This is a small library app project created with JavaScript. To put in practice Object oriented principles using objects & objects constructors to create a book.
