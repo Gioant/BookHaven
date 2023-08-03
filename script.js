@@ -8,8 +8,28 @@ class book {
         this.status = status;
     }
 
+    //add book to library
     addToLibrary(library) {
         library.addBook(this);
+    }
+
+    // Method to add the book to the library from form inputs
+    addBookToLibrary(library, imgLinkValue, titleValue, authorValue, pagesValue, yearValue, readStatusValue) {
+        // Update the book cover URL with the provided imgLinkValue
+        this.setBookCover(imgLinkValue);
+
+        // Set the title, author, pages, year, and status with the provided values
+        this.setTitle(titleValue);
+        this.setAuthor(authorValue);
+        this.setPages(pagesValue);
+        this.setYear(yearValue);
+        this.setStatus(readStatusValue);
+
+        // Add the book to the library
+        this.addToLibrary(library);
+
+        // Call the displayBooks method to ensure consistency
+        library.displayBooks();
     }
 
     get bookCover() {
@@ -145,7 +165,72 @@ class Library {
         return bookElement;
     }
 
-    addBooksManually() {
+    // Method to change the status of a book in the library
+    changeBookStatus(card) {
+        // Get the data-index attribute of the card
+        const dataIndex = card.getAttribute('data-index');
 
+        // Update the book status in the library array
+        if (this.library[dataIndex].status === 'Read') {
+            this.library[dataIndex].status = 'Not Read';
+        } else {
+            this.library[dataIndex].status = 'Read';
+        }
+
+        // Update the book status button in the DOM
+        const statusButton = card.querySelector('.book-status');
+        statusButton.textContent = this.library[dataIndex].status;
+
+        // Update the background color of the status button
+        if (this.library[dataIndex].status === 'Read') {
+            statusButton.style.backgroundColor = '#32CD32';
+        } else {
+            statusButton.style.backgroundColor = '#FF004F';
+        }
+    }
+
+    addBooksManually() {
+        const book1 = new Book(
+            "https://upload.wikimedia.org/wikipedia/en/e/e4/Ender%27s_game_cover_ISBN_0312932081.jpg",
+            "The Ender's Game",
+            "Orson Scott Card",
+            "374",
+            "1985",
+            "Read"
+        );
+
+        const book2 = new Book(
+            "https://i0.wp.com/booksofbrilliance.com/wp-content/uploads/2020/06/4956476726_26b690b952_c.jpg",
+            "Fahrenheit 451",
+            "Ray Bradbury",
+            "158",
+            "1953",
+            "Not Read"
+        );
+
+        const book3 = new Book(
+            "https://dynamic.indigoimages.ca/v1/books/books/0140386645/1.jpg",
+            "The Westing Game",
+            "Ellen Raskin",
+            "216",
+            "1978",
+            "Read"
+        );
+
+        this.addBook(book1);
+        this.addBook(book2);
+        this.addBook(book3);
+
+        // Call createBookElement for each book and append the book elements to the library container
+        const libraryContainer = document.getElementById("library-container");
+        const bookElements = [book1, book2, book3].map((book, index) =>
+            this.createBookElement(book, index)
+        );
+        bookElements.forEach((bookElement) => {
+            libraryContainer.appendChild(bookElement);
+        });
+
+        // Call the displayBooks method to ensure consistency
+        this.displayBooks();
     }
 }
