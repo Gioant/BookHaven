@@ -1,83 +1,83 @@
-class book {
+// get necessary form elements
+const imgInput = document.getElementById('img-link');
+const titleInput = document.getElementById('title');
+const authorInput = document.getElementById('author');
+const pagesInput = document.getElementById('pages');
+const yearInput = document.getElementById('year');
+const readStatusInput = document.getElementById('Read-Status');
+const submitBtn = document.getElementById("book-submit");
+
+// Get the div elements for displaying book details
+const bookImageDiv = document.getElementsByClassName('book-image');
+const bookTitleDiv = document.getElementsByClassName('book-title');
+const bookAuthorDiv = document.getElementsByClassName('book-author');
+const bookPagesDiv = document.getElementsByClassName('book-pages');
+const bookYearDiv = document.getElementsByClassName('book-year');
+const bookStatusButton = document.getElementsByClassName('book-status');
+
+
+class Book {
     constructor(bookCover, title, author, pages, year, status) {
-        this.bookCover = bookCover;
-        this.title = title;
-        this.author = author;
-        this.pages = pages;
-        this.year = year;
-        this.status = status;
+        this._bookCover = bookCover;
+        this._title = title;
+        this._author = author;
+        this._pages = pages;
+        this._year = year;
+        this._status = status;
     }
 
-    //add book to library
-    addToLibrary(library) {
-        library.addBook(this);
-    }
-
-    // Method to add the book to the library from form inputs
-    addBookToLibrary(library, imgLinkValue, titleValue, authorValue, pagesValue, yearValue, readStatusValue) {
-        // Update the book cover URL with the provided imgLinkValue
-        this.setBookCover(imgLinkValue);
-
-        // Set the title, author, pages, year, and status with the provided values
-        this.setTitle(titleValue);
-        this.setAuthor(authorValue);
-        this.setPages(pagesValue);
-        this.setYear(yearValue);
-        this.setStatus(readStatusValue);
-
-        // Add the book to the library
-        this.addToLibrary(library);
-
-        // Call the displayBooks method to ensure consistency
-        library.displayBooks();
-    }
-
+    // Getter and Setter for bookCover
     get bookCover() {
-        return this.bookCover;
+        return this._bookCover;
     }
 
     set bookCover(newBookCover) {
-        this.bookCover = newBookCover;
+        this._bookCover = newBookCover;
     }
 
+    // Getter and Setter for title
     get title() {
-        return this.title;
+        return this._title;
     }
 
     set title(newTitle) {
-        this.title = newTitle;
+        this._title = newTitle;
     }
 
+    // Getter and Setter for author
     get author() {
-        return this.author;
+        return this._author;
     }
 
     set author(newAuthor) {
-        this.author = newAuthor;
+        this._author = newAuthor;
     }
 
+    // Getter and Setter for pages
     get pages() {
-        return this.pages;
+        return this._pages;
     }
 
     set pages(newPages) {
-        this.pages = newPages;
+        this._pages = newPages;
     }
 
+    // Getter and Setter for year
     get year() {
-        return this.year;
+        return this._year;
     }
 
     set year(newYear) {
-        this.year = newYear;
+        this._year = newYear;
     }
 
+    // Getter and Setter for status
     get status() {
-        return this.status;
+        return this._status;
     }
 
     set status(newStatus) {
-        this.status = newStatus;
+        this._status = newStatus;
     }
 }
 
@@ -103,7 +103,7 @@ class Library {
         }
     }
 
-    //method to create DOM element for book and append it to library
+    //method to create DOM element for book from form and append it to library
     createBookElement(book, index) {
         const bookElement = document.createElement('div');
         bookElement.classList.add('card-books');
@@ -189,33 +189,43 @@ class Library {
         }
     }
 
+    // Method to create a new book and add it to the library
+    createBook(bookCover, title, author, pages, year, status) {
+        const newBook = new Book();
+        newBook.setBookCover(bookCover);
+        newBook.setTitle(title);
+        newBook.setAuthor(author);
+        newBook.setPages(pages);
+        newBook.setYear(year);
+        newBook.setStatus(status);
+
+        this.addBook(newBook);
+    }
+
     addBooksManually() {
-        const book1 = new Book(
-            "https://upload.wikimedia.org/wikipedia/en/e/e4/Ender%27s_game_cover_ISBN_0312932081.jpg",
-            "The Ender's Game",
-            "Orson Scott Card",
-            "374",
-            "1985",
-            "Read"
-        );
+        const book1 = new Book();
+        book1.bookCover = "https://upload.wikimedia.org/wikipedia/en/e/e4/Ender%27s_game_cover_ISBN_0312932081.jpg";
+        book1.title = "The Ender's Game";
+        book1.author = "Orson Scott Card";
+        book1.pages = "374";
+        book1.year = "1985";
+        book1.status = "Read";
 
-        const book2 = new Book(
-            "https://i0.wp.com/booksofbrilliance.com/wp-content/uploads/2020/06/4956476726_26b690b952_c.jpg",
-            "Fahrenheit 451",
-            "Ray Bradbury",
-            "158",
-            "1953",
-            "Not Read"
-        );
+        const book2 = new Book();
+        book2.bookCover = "https://i0.wp.com/booksofbrilliance.com/wp-content/uploads/2020/06/4956476726_26b690b952_c.jpg";
+        book2.title = "Fahrenheit 451";
+        book2.author = "Ray Bradbury";
+        book2.pages = "158";
+        book2.year = "1953";
+        book2.status = "Not Read";
 
-        const book3 = new Book(
-            "https://dynamic.indigoimages.ca/v1/books/books/0140386645/1.jpg",
-            "The Westing Game",
-            "Ellen Raskin",
-            "216",
-            "1978",
-            "Read"
-        );
+        const book3 = new Book();
+        book3.bookCover = "https://dynamic.indigoimages.ca/v1/books/books/0140386645/1.jpg";
+        book3.title = "The Westing Game";
+        book3.author = "Ellen Raskin";
+        book3.pages = "216";
+        book3.year = "1978";
+        book3.status = "Read";
 
         this.addBook(book1);
         this.addBook(book2);
@@ -234,3 +244,12 @@ class Library {
         this.displayBooks();
     }
 }
+
+
+//must create new instance of library to access method
+const library = new Library();
+
+//load books manually after DOM is loaded
+document.addEventListener("DOMContentLoaded", function () {
+    library.addBooksManually();
+});
