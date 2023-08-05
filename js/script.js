@@ -46,70 +46,70 @@ window.onclick = function (event) {
 
 
 
-class Book {
-    constructor(bookCover, title, author, pages, year, status) {
-        this._bookCover = bookCover;
-        this._title = title;
-        this._author = author;
-        this._pages = pages;
-        this._year = year;
-        this._status = status;
-    }
+// class Book {
+//     constructor(bookCover, title, author, pages, year, status) {
+//         this._bookCover = bookCover;
+//         this._title = title;
+//         this._author = author;
+//         this._pages = pages;
+//         this._year = year;
+//         this._status = status;
+//     }
 
-    // Getter and Setter for bookCover
-    get bookCover() {
-        return this._bookCover;
-    }
+//     // Getter and Setter for bookCover
+//     get bookCover() {
+//         return this._bookCover;
+//     }
 
-    set bookCover(newBookCover) {
-        this._bookCover = newBookCover;
-    }
+//     set bookCover(newBookCover) {
+//         this._bookCover = newBookCover;
+//     }
 
-    // Getter and Setter for title
-    get title() {
-        return this._title;
-    }
+//     // Getter and Setter for title
+//     get title() {
+//         return this._title;
+//     }
 
-    set title(newTitle) {
-        this._title = newTitle;
-    }
+//     set title(newTitle) {
+//         this._title = newTitle;
+//     }
 
-    // Getter and Setter for author
-    get author() {
-        return this._author;
-    }
+//     // Getter and Setter for author
+//     get author() {
+//         return this._author;
+//     }
 
-    set author(newAuthor) {
-        this._author = newAuthor;
-    }
+//     set author(newAuthor) {
+//         this._author = newAuthor;
+//     }
 
-    // Getter and Setter for pages
-    get pages() {
-        return this._pages;
-    }
+//     // Getter and Setter for pages
+//     get pages() {
+//         return this._pages;
+//     }
 
-    set pages(newPages) {
-        this._pages = newPages;
-    }
+//     set pages(newPages) {
+//         this._pages = newPages;
+//     }
 
-    // Getter and Setter for year
-    get year() {
-        return this._year;
-    }
+//     // Getter and Setter for year
+//     get year() {
+//         return this._year;
+//     }
 
-    set year(newYear) {
-        this._year = newYear;
-    }
+//     set year(newYear) {
+//         this._year = newYear;
+//     }
 
-    // Getter and Setter for status
-    get status() {
-        return this._status;
-    }
+//     // Getter and Setter for status
+//     get status() {
+//         return this._status;
+//     }
 
-    set status(newStatus) {
-        this._status = newStatus;
-    }
-}
+//     set status(newStatus) {
+//         this._status = newStatus;
+//     }
+// }
 
 
 class Library {
@@ -121,16 +121,12 @@ class Library {
         this.library.push(book);
     }
 
-    removeBook(index) {
-        this.library.splice(index, 1);
-    }
+    removeBook(card) {
+        const dataIndex = card.getAttribute('data-index');
+        this.library.splice(dataIndex, 1);
 
-    changeBookStatus(index) {
-        if (this.library[index].status === 'Read') {
-            this.library[index].status = 'Not Read';
-        } else {
-            this.library[index].status = 'Read';
-        }
+        // Remove the book element from the DOM
+        card.remove();
     }
 
     //method to create DOM element for book from form and append it to library
@@ -195,23 +191,18 @@ class Library {
         return bookElement;
     }
 
-    // Method to change the status of a book in the library
+    // Method to change the status of a book in the library and update the DOM
     changeBookStatus(card) {
-        // Get the data-index attribute of the card
         const dataIndex = card.getAttribute('data-index');
-
-        // Update the book status in the library array
         if (this.library[dataIndex].status === 'Read') {
             this.library[dataIndex].status = 'Not Read';
         } else {
             this.library[dataIndex].status = 'Read';
         }
 
-        // Update the book status button in the DOM
         const statusButton = card.querySelector('.book-status');
         statusButton.textContent = this.library[dataIndex].status;
 
-        // Update the background color of the status button
         if (this.library[dataIndex].status === 'Read') {
             statusButton.style.backgroundColor = '#32CD32';
         } else {
@@ -230,6 +221,12 @@ class Library {
         newBook.setStatus(status);
 
         this.addBook(newBook);
+    }
+
+    addBookToLibrary(imgLinkValue, titleValue, authorValue, pagesValue, yearValue, readStatusValue) {
+        const newBook = new Book(imgLinkValue, titleValue, authorValue, pagesValue, yearValue, readStatusValue);
+        this.addBook(newBook);
+        this.displayBooks();
     }
 
     //method to add 3 books manually using setters from book class
@@ -365,8 +362,14 @@ class Library {
 
         if (allInputsFilled) {
             // Make sure to save the return value from the validate function (whether default or one entered by the user)
-            const imgLinkValue = validateImage(imgInput.value);
-            addBooktoLibrary(imgLinkValue);
+            const imgLinkValue = this.validateImage(imgInput.value);
+            const titleValue = titleInput.value;
+            const authorValue = authorInput.value;
+            const pagesValue = pagesInput.value;
+            const yearValue = yearInput.value;
+            const readStatusValue = readStatusInput.value;
+
+            this.addBookToLibrary(imgLinkValue, titleValue, authorValue, pagesValue, yearValue, readStatusValue);
 
             // Show SweetAlert2 pop-up
             Swal.fire({
@@ -384,11 +387,32 @@ class Library {
     }
 }
 
-
-    //must create new instance of library to access method
-    const library = new Library();
+//must create new instance of library to access methods
+const library = new Library();
 
 //load books manually after DOM is loaded
-document.addEventListener("DOMContentLoaded", function() {
-        library.addBooksManually();
-    });
+document.addEventListener("DOMContentLoaded", function () {
+    library.addBooksManually();
+});
+
+document.querySelector('section').addEventListener('click', function (e) {
+    if (e.target.parentElement.classList.contains('remove')) {
+        const card = e.target.closest('.card-books');
+        library.removeBook(card); // Call the removeBook method from the library instance
+    }
+
+    if (e.target.classList.contains('book-status')) {
+        const card = e.target.closest('.card-books');
+        library.changeBookStatus(card); // Call the changeBookStatus method from the library instance
+    }
+});
+
+// Add functions using event listeners for validation for form inputs
+imgInput.addEventListener("blur", (event) => library.validateImage(event.target.value));
+authorInput.addEventListener("input", (event) => library.validateLetters(event));
+titleInput.addEventListener("input", (event) => library.validateTitle(event));
+pagesInput.addEventListener("input", (event) => library.validateNumbers(event));
+yearInput.addEventListener("input", (event) => library.validateNumbers(event));
+
+// Add event listener for form submission and call formSubmit method on the library instance
+submitBtn.addEventListener("click", (event) => library.formSubmit(event));
