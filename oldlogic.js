@@ -151,8 +151,6 @@ function formSubmit(event) {
 }
 
 
-
-
 /* ======= START OF ADD BOOK LOGIC ====== */
 let library = [];
 
