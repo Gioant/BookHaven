@@ -16,6 +16,36 @@ const bookYearDiv = document.getElementsByClassName('book-year');
 const bookStatusButton = document.getElementsByClassName('book-status');
 
 
+/* ====== MODAL LOGIC ====== */
+// Get the modal
+const modalBox = document.getElementById('modal');
+
+// Get the button that opens the modal
+const modalBtn = document.getElementById("open-modal");
+
+// Get the <span> element that closes the modal
+const spanClose = document.getElementById("close");
+
+// When the user clicks the button, open the modal 
+modalBtn.onclick = function () {
+    modalBox.style.display = "flex";
+    modalBox.style.alignItems = "center";
+}
+
+// When the user clicks on <span> (x), close the modal
+spanClose.onclick = function () {
+    modalBox.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+    if (event.target == modalBox) {
+        modalBox.style.display = "none";
+    }
+}
+
+
+
 class Book {
     constructor(bookCover, title, author, pages, year, status) {
         this._bookCover = bookCover;
@@ -202,6 +232,7 @@ class Library {
         this.addBook(newBook);
     }
 
+    //method to add 3 books manually using setters from book class
     addBooksManually() {
         const book1 = new Book();
         book1.bookCover = "https://upload.wikimedia.org/wikipedia/en/e/e4/Ender%27s_game_cover_ISBN_0312932081.jpg";
@@ -243,13 +274,121 @@ class Library {
         // Call the displayBooks method to ensure consistency
         this.displayBooks();
     }
+
+    //method to
+    displayBooks() {
+        const libraryContainer = document.getElementById('library-container');
+
+        // Clear the container before adding books
+        libraryContainer.innerHTML = '';
+
+        this.library.forEach((book, index) => {
+            const bookElement = this.createBookElement(book, index);
+            libraryContainer.appendChild(bookElement);
+        });
+    }
+
+    /* ======= VALIDATE FORM SECTION =======  */
+    //function for validating for letters only
+    validateLetters(event) {
+        const value = event.target.value;
+
+        //replace any characters that is not a letter with empty ""
+        const finalValue = value.replace(/[^a-zA-Z',\s]/g, "");
+
+        // Set the value of the input element to the cleaned and formatted value
+        return event.target.value = finalValue;
+    }
+
+    //function for validating title 
+    validateTitle(event) {
+        const value = event.target.value;
+
+        //replace any characters that is not a letter with empty ""
+        const finalValue = value.replace(/[^a-zA-Z0-9',:\s]/g, "");
+
+        // Set the value of the input element to the cleaned and formatted value
+        return event.target.value = finalValue;
+    }
+
+    //function to validate for numbers only
+    validateNumbers(event) {
+        let value = event.target.value;
+
+        let finalValue = value.replace(/[^0-9]/g, "");
+
+        return event.target.value = finalValue;
+    }
+
+
+    validateImage(imageUrl) {
+        const trimmedUrl = imageUrl.trim();
+
+        if (trimmedUrl === '') {
+            return "https://islandpress.org/sites/default/files/default_book_cover_2015.jpg";
+        }
+
+        const imageExtensions = ['.png', '.jpg', '.jpeg'];
+        const fileExtension = trimmedUrl.substring(trimmedUrl.lastIndexOf('.')).toLowerCase();
+
+        if (imageExtensions.includes(fileExtension)) {
+            return trimmedUrl;
+        } else {
+            return "https://islandpress.org/sites/default/files/default_book_cover_2015.jpg";
+        }
+    }
+
+    //function to prevent form of submitting
+    formSubmit(event) {
+        event.preventDefault();
+
+        // Check for empty form inputs and validate minlength
+        const inputs = [titleInput, authorInput, pagesInput, yearInput, readStatusInput];
+        let allInputsFilled = true;
+
+        inputs.forEach(input => {
+            if (input.value.trim() === '') {
+                input.style.borderColor = 'red';
+                allInputsFilled = false;
+            } else {
+                input.style.borderColor = ''; // Reset the border color if not empty
+            }
+
+            if (input.getAttribute('minlength') && input.value.trim().length < parseInt(input.getAttribute('minlength'))) {
+                input.setCustomValidity(`Please enter at least ${input.getAttribute('minlength')} characters.`);
+                input.reportValidity();
+                allInputsFilled = false;
+            } else {
+                input.setCustomValidity(''); // Reset the custom validity message
+            }
+        });
+
+        if (allInputsFilled) {
+            // Make sure to save the return value from the validate function (whether default or one entered by the user)
+            const imgLinkValue = validateImage(imgInput.value);
+            addBooktoLibrary(imgLinkValue);
+
+            // Show SweetAlert2 pop-up
+            Swal.fire({
+                title: 'Success!',
+                text: 'Book Successfully Added To Library.',
+                icon: 'success',
+                confirmButtonText: 'OK',
+                customClass: {
+                    title: 'alert-title',
+                    text: 'alert-text'
+                },
+                theme: 'Borderless'
+            });
+        }
+    }
 }
 
 
-//must create new instance of library to access method
-const library = new Library();
+    //must create new instance of library to access method
+    const library = new Library();
 
 //load books manually after DOM is loaded
-document.addEventListener("DOMContentLoaded", function () {
-    library.addBooksManually();
-});
+document.addEventListener("DOMContentLoaded", function() {
+        library.addBooksManually();
+    });
