@@ -343,6 +343,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Add event listener to the parent element using event delegation
 document.querySelector('section').addEventListener('click', function (e) {
+
+    if (e.target.classList.contains('card-books')) {
+        const divCount = parentElement.querySelectorAll('div').length;
+
+        if (divCount === 1) {
+            parentElement.style.width = 'unset';
+        }
+    }
+
     // Check if the clicked element or its parent is a remove button
     if (e.target.parentElement.classList.contains('remove')) {
         // Get the parent card element
