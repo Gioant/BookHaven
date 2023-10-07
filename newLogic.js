@@ -127,6 +127,12 @@ class Library {
 
         // Remove the book element from the DOM
         card.remove();
+
+        //update data-index of remaining cards
+        const remainingCards = document.querySelectorAll('.card-books');
+        remainingCards.forEach((card, index) => {
+            card.setAttribute('data-index', index);
+        });
     }
 
     //method to create DOM element for book from form and append it to library
