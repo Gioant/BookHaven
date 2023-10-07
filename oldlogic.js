@@ -332,6 +332,12 @@ function removeBook(card) {
 
     // Remove the book from the library array
     library.splice(dataIndex, 1);
+
+    // Update the data-index attributes of remaining cards
+    const remainingCards = document.querySelectorAll('.card-books');
+    remainingCards.forEach((card, index) => {
+        card.setAttribute('data-index', index);
+    });
 }
 
 
